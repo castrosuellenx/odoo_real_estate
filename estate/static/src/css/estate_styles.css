@@ -1,0 +1,11 @@
+.font-weight-normal {
+    font-weight: 400 !important;
+}
+
+.mb-16 {
+    margin-bottom: 1rem !important;
+}
+
+.cursor-text {
+    cursor: text !important;
+}
