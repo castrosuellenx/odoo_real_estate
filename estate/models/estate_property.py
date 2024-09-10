@@ -42,3 +42,4 @@ class EstateProperty(models.Model):
         ],
         help="The status of the property"
     )
+    estate_property_type_id = fields.Many2one('estate.property.type', string='Property Type')
