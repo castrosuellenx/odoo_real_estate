@@ -4,9 +4,11 @@
         <field name="model">estate.property.type</field>
         <field name="arch" type="xml">
             <form string="Property Type">
-                <h1 class="font-weight-normal mb-16">
-                    <field name="name" class="cursor-text" />
-                </h1>
+                <sheet>
+                    <h1 class="font-weight-normal mb-16">
+                        <field name="name" class="cursor-text" />
+                    </h1>
+                </sheet>
             </form>
         </field>
     </record>

@@ -47,9 +47,11 @@
         <field name="arch" type="xml">
             <form string="Estate Property">
                 <sheet>
-                    <h1 class="font-weight-normal mb-16">
+                    <h1 class="font-weight-normal mb-8">
                         <field name="name" class="cursor-text" />
                     </h1>
+
+                    <field name="tag_ids" widget="many2many_tags" class="mb-24"/>
 
                     <group col="2">
                         <group>

@@ -2,8 +2,20 @@
     font-weight: 400 !important;
 }
 
+.mb-8 {
+    margin-bottom: 0.5rem !important;
+}
+
 .mb-16 {
     margin-bottom: 1rem !important;
+}
+
+.mb-20 {
+    margin-bottom: 1.25rem !important;
+}
+
+.mb-24 {
+    margin-bottom: 1.5rem !important;
 }
 
 .cursor-text {
