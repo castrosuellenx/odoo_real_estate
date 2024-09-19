@@ -8,6 +8,17 @@
                     <h1 class="font-weight-normal mb-16">
                         <field name="name" class="cursor-text" />
                     </h1>
+                    <notebook>
+                        <page string="Properties">
+                             <field name="property_ids">
+                                <tree>
+                                    <field name="name" width="70%" />
+                                    <field name="expected_price" width="15%" />
+                                    <field name="state" width="15%" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>
