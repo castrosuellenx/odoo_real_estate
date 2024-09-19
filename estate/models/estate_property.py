@@ -1,5 +1,6 @@
 from odoo import models, fields, api
 from odoo.exceptions import UserError
+from odoo.tools.float_utils import float_compare, float_is_zero
 from dateutil.relativedelta import relativedelta
 
 class EstateProperty(models.Model):
@@ -75,6 +76,13 @@ class EstateProperty(models.Model):
         else:
             self.garden_area = None
             self.garden_orientation = None
+
+    @api.constrains('expected_price', 'selling_price')
+    def _check_selling_price(self):
+        for record in self:
+            if not float_is_zero(record.selling_price, precision_digits=2):
+                if float_compare(record.selling_price, 0.9 * record.expected_price, precision_digits=2) < 0:
+                    raise UserError("The selling price must be at least 90% of the expected price.")
 
     def action_set_property_as_sold(self):
         for record in self:
