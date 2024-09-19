@@ -46,6 +46,10 @@
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <form string="Estate Property">
+                <header>
+                    <button name="action_set_property_as_sold" type="object" string="SOLD" class="btn-primary"/>
+                    <button name="action_set_property_as_canceled" type="object" string="CANCEL"/>
+                </header>
                 <sheet>
                     <h1 class="font-weight-normal mb-8">
                         <field name="name" class="cursor-text" />
@@ -55,6 +59,7 @@
 
                     <group col="2">
                         <group>
+                            <field name="state" />
                             <field name="estate_property_type_id"/>
                             <field name="postcode" />
                             <field name="date_availability" />
