@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 from dateutil.relativedelta import relativedelta
 
 class EstatePropertyOffer(models.Model):
@@ -34,6 +35,19 @@ class EstatePropertyOffer(models.Model):
         for offer in self:
             date = offer.create_date.date() if offer.create_date else fields.Date.today()
             offer.validity = (offer.date_deadline - date).days
+
+    @api.model
+    def create(self, vals):
+        property_id = self.env['estate.property'].browse(vals['property_id'])
+
+        if property_id.state != 'new':
+            raise ValidationError("You can not make an offer on a property that is not in 'new' state.")
+
+        if property_id.best_price > vals['price']:
+            raise ValidationError("You can not make an offer below the best offer.")
+
+        property_id.state = 'offer_received'
+        return super().create(vals)
 
     def action_accept_offer(self):
         for offer in self:
