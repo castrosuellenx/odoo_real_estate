@@ -49,6 +49,8 @@
                 <header>
                     <button name="action_set_property_as_sold" type="object" string="SOLD" class="btn-primary"/>
                     <button name="action_set_property_as_canceled" type="object" string="CANCEL"/>
+
+                    <field name="state" widget="statusbar" statusbar_visible="new,offer_received,offer_accepted,sold"/>
                 </header>
                 <sheet>
                     <h1 class="font-weight-normal mb-8">
@@ -59,7 +61,6 @@
 
                     <group col="2">
                         <group>
-                            <field name="state" />
                             <field name="property_type_id"/>
                             <field name="postcode" />
                             <field name="date_availability" />
