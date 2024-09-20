@@ -3,15 +3,16 @@
         <field name="name">estate.property.tree</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <tree string="Estate Properties">
+            <tree string="Estate Properties" decoration-success="state in ('offer_received', 'offer_accepted')"
+                  decoration-bf="state == 'offer_accepted'" decoration-muted="state == 'sold'">
                 <field name="name" />
                 <field name="postcode" />
                 <field name="bedrooms" />
                 <field name="living_area" />
                 <field name="expected_price" />
                 <field name="selling_price" />
-                <field name="date_availability" />
-                <field name="state" />
+                <field name="date_availability" optional="hide" />
+                <field name="state" invisible="1" />
                 <field name="property_type_id" />
             </tree>
         </field>
@@ -47,8 +48,8 @@
         <field name="arch" type="xml">
             <form string="Estate Property">
                 <header>
-                    <button name="action_set_property_as_sold" type="object" string="SOLD" class="btn-primary"/>
-                    <button name="action_set_property_as_canceled" type="object" string="CANCEL"/>
+                    <button name="action_set_property_as_sold" type="object" string="SOLD" class="btn-primary" states="new,offer_received,offer_accepted"/>
+                    <button name="action_set_property_as_canceled" type="object" string="CANCEL" states="new,offer_received,offer_accepted"/>
 
                     <field name="state" widget="statusbar" statusbar_visible="new,offer_received,offer_accepted,sold"/>
                 </header>
@@ -57,15 +58,14 @@
                         <field name="name" class="cursor-text" />
                     </h1>
 
-                    <field name="tag_ids" widget="many2many_tags" class="mb-24"/>
+                    <field name="tag_ids" class="mb-24" widget="many2many_tags" options="{'color_field': 'color'}"/>
 
                     <group col="2">
                         <group>
-                            <field name="property_type_id"/>
+                            <field name="property_type_id" options="{'no_create': True}"/>
                             <field name="postcode" />
                             <field name="date_availability" />
                         </group>
-
                         <group>
                             <field name="expected_price" />
                             <field name="selling_price" />
@@ -82,14 +82,14 @@
                                 <field name="facades" />
                                 <field name="garage" />
                                 <field name="garden" />
-                                <field name="garden_area" />
-                                <field name="garden_orientation" />
+                                <field name="garden_area" attrs="{'invisible': [('garden', '=', False)]}" />
+                                <field name="garden_orientation" attrs="{'invisible': [('garden', '=', False)]}" />
                                 <field name="total_area" />
                             </group>
                         </page>
 
                         <page string="Offers">
-                            <field name="offer_ids" />
+                            <field name="offer_ids" attrs="{'readonly': [('state', 'in', ['offer_accepted', 'sold', 'canceled'])]}" />
                         </page>
 
                         <page string="Other Info">
